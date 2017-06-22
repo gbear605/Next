@@ -44,10 +44,40 @@ class DataManager {
         
         let tags: [String] = json["tags"] as? [String] ?? []
         
+        let difficultyString: String = json["difficulty"] as? String ?? ""
+        
+        var difficulty: Todo.TripleState = .ERR
+        switch difficultyString {
+        case "HIGH":
+            difficulty = .HIGH
+        case "MEDIUM":
+            difficulty = .MEDIUM
+        case "LOW":
+            difficulty = .LOW
+        default:
+            break
+        }
+            
+        let importanceString: String = json["importance"] as? String ?? ""
+        
+        var importance: Todo.TripleState = .ERR
+        switch importanceString {
+        case "HIGH":
+            importance = .HIGH
+        case "MEDIUM":
+            importance = .MEDIUM
+        case "LOW":
+            importance = .LOW
+        default:
+            break
+        }
+        
         return Todo(
             name: name,
             tags: tags,
-            timeToDo: timeToDo
+            timeToDo: timeToDo,
+            difficulty: difficulty,
+            importance: importance
         )
     }
     
@@ -55,7 +85,9 @@ class DataManager {
         return [
             "name" : todo.name,
             "tags" : todo.tags,
-            "timeToComplete" : todo.timeToDo.get(in: Time.TimeUnit.MINUTE)
+            "timeToComplete" : todo.timeToDo.get(in: Time.TimeUnit.MINUTE),
+            "importance" : "\(todo.importance)",
+            "difficulty" : "\(todo.difficulty)"
         ]
     }
     

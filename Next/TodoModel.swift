@@ -40,7 +40,13 @@ class TodoModel {
 }
 
 struct Todo {
+    enum TripleState {
+        case HIGH, MEDIUM, LOW, ERR
+    }
+    
     let name: String
     let tags: [String]
     let timeToDo: Time
+    let difficulty: TripleState
+    let importance: TripleState
 }

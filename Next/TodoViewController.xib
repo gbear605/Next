@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TodoViewController" customModule="Next" customModuleProvider="target">
             <connections>
+                <outlet property="difficultyLabel" destination="Gf7-cq-dFX" id="ak5-EB-eak"/>
+                <outlet property="importanceLabel" destination="Dsv-PP-j7h" id="Ern-Uc-C4z"/>
                 <outlet property="tagLabel" destination="ChT-nU-Huk" id="sX8-GW-LVv"/>
                 <outlet property="timeToDoLabel" destination="xJI-DR-Qja" id="Vwu-8I-lth"/>
                 <outlet property="view" destination="iN0-l3-epB" id="9Xh-SX-RJO"/>

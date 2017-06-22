@@ -38,7 +38,33 @@ class TodoInputController: UIViewController {
         
         let time: Time = Time(amount: minutesNum + Time.TimeUnit.MINUTES_PER_HOUR * hoursNum, unit: Time.TimeUnit.MINUTE)
         
-        table?.create(todo: Todo(name: name.text ?? "", tags: [tag.text ?? ""], timeToDo: time))
+        var importanceState: Todo.TripleState? = nil
+        
+        switch importance.selectedSegmentIndex {
+        case 0:
+            importanceState = .LOW
+        case 1:
+            importanceState = .MEDIUM
+        case 2:
+            importanceState = .HIGH
+        default:
+            print("ERROR: A state was selected on the importance switch that shouldn't have been possible")
+        }
+        
+        var difficultyState: Todo.TripleState? = nil
+        
+        switch difficulty.selectedSegmentIndex {
+        case 0:
+            difficultyState = .LOW
+        case 1:
+            difficultyState = .MEDIUM
+        case 2:
+            difficultyState = .HIGH
+        default:
+            print("ERROR: A state was selected on the difficulty switch that shouldn't have been possible")
+        }
+        
+        table?.create(todo: Todo(name: name.text ?? "", tags: [tag.text ?? ""], timeToDo: time, difficulty: difficultyState ?? Todo.TripleState.LOW, importance: importanceState ?? Todo.TripleState.LOW))
     }
 
 }
