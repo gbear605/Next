@@ -12,6 +12,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         AppDelegate.dataManager = DataManager()
+        AppDelegate.dataManager!.persistentContainer.loadPersistentStores() { (description, error) in
+            if let error = error {
+                fatalError("Failed to load Core Data stack: \(error)")
+            }
+            AppDelegate.dataManager!.managedContext = AppDelegate.dataManager!.persistentContainer.viewContext
+            for category in TodoModel.Category.list {
+                AppDelegate.dataManager!.loadData(for: category)
+            }
+        }
         
         return true
     }

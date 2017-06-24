@@ -49,6 +49,32 @@ struct Todo {
     enum TripleState {
         case HIGH, MEDIUM, LOW, ERR
         
+        func toInt() -> Int16 {
+            switch self {
+            case .HIGH:
+                return 3
+            case .MEDIUM:
+                return 2
+            case .LOW:
+                return 1
+            case .ERR:
+                return 0
+            }
+        }
+        
+        init(from num: Int16) {
+            switch num {
+            case 3:
+                self = .HIGH
+            case 2:
+                self = .MEDIUM
+            case 1:
+                self = .LOW
+            default:
+                self = .ERR
+            }
+        }
+        
         init(from text: String) {
             switch text {
             case "HIGH":

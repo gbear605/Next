@@ -4,115 +4,78 @@ import CoreData
 
 class DataManager: NSObject {
     
-    var persistentContainer: NSPersistentContainer
+    let persistentContainer: NSPersistentContainer
+    var managedContext: NSManagedObjectContext? = nil
     
-    static func getURL(for category: TodoModel.Category) -> URL {
-        //Get the url for a file in the application's document directory
-        // with a name like generic_data.json
-        return URL(fileURLWithPath: NSHomeDirectory())
-            .appendingPathComponent("Documents")
-            .appendingPathComponent("\("\(category)".lowercased())_data.json")
-    }
-    
-    var urls: [TodoModel.Category: URL] = [:]
-    
-    func saveURL(for category: TodoModel.Category) {
-        let url = DataManager.getURL(for: category)
-        urls[category] = url
+    func convert(managedTodo: TodoMO) -> Todo {
+        var category: TodoModel.Category? = nil
+        if managedTodo is GenericTodoMO {
+            category = .GENERIC
+        } else if managedTodo is DependentTodoMO {
+            category = .DEPENDENT
+        } else if managedTodo is EventTodoMO {
+            category = .EVENT
+        } else if managedTodo is LongtermTodoMO {
+            category = .LONGTERM
+        } else if managedTodo is NowTodoMO {
+            category = .NOW
+        } else {
+            fatalError("Failed to convert managedTodo to specific category todo")
+        }
+        
+        return Todo (name: managedTodo.name!,
+                     category: category!,
+                     tags: [], //TODO: load tags
+                     timeToDo: Time(amount: managedTodo.timeToDo, unit: Time.TimeUnit.MINUTE),
+                     difficulty: Todo.TripleState(from: managedTodo.difficulty),
+                     importance: Todo.TripleState(from: managedTodo.importance))
     }
     
     func loadData(for category: TodoModel.Category) {
+        for todo in load(category) {
+            print("Here6")
+            // Save is false so that todos aren't lost
+            // if the app crashes while this is happening
+            TodoModel.add(category, todo: convert(managedTodo: todo), save: false)
+        }
+    }
+    
+    override init() {
+        persistentContainer = NSPersistentContainer(name: "Next")
+    }
+    
+    func load(_ category: TodoModel.Category) -> [TodoMO]{
+        let todoFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "\("\(category)".capitalized)Todo")
+        print("\(managedContext!.persistentStoreCoordinator)")
         do {
-            guard FileManager.default.fileExists(atPath: urls[category]!.path) else {
-                // Make sure that the file exists
-                return
-            }
-            
-            // Get the data from the file
-            let data = try Data(contentsOf: urls[category]!)
-            
-            // Turn the data into a dictionary of strings matching with anything
-            let todos = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
-            
-            for todo in todos {
-                // Save is false so that todos aren't lost
-                // if the app crashes while this is happening
-                TodoModel.add(category, todo: make(category, from: todo), save: false)
-            }
-        }
-        catch {
-            print("Error in reading saved todos: \(error)")
+            return try managedContext!.fetch(todoFetch) as! [TodoMO]
+        } catch {
+            fatalError("Failed to fetch \(category) todos: \(error)")
         }
     }
     
-    init(completionClosure: @escaping () -> ()) {
-        persistentContainer = NSPersistentContainer(name: "DataModel")
-        persistentContainer.loadPersistentStores() { (description, error) in
-            if let error = error {
-                fatalError("Failed to load Core Data stack: \(error)")
-            }
-            completionClosure()
-        }
+    func makeManagedObject(from todo: Todo, category: TodoModel.Category) -> NSManagedObject {
+        let managedTodo: TodoMO = NSEntityDescription.insertNewObject(forEntityName: "\("\(category)".capitalized)Todo", into: managedContext!) as! TodoMO
+        managedTodo.name = todo.name
+        managedTodo.timeToDo = todo.timeToDo.get(in: Time.TimeUnit.MINUTE)
+        managedTodo.difficulty = todo.difficulty.toInt()
+        managedTodo.importance = todo.importance.toInt()
+        return managedTodo
         
-        for category in TodoModel.Category.list {
-            saveURL(for: category)
-            loadData(for: category)
-        }
-        
-    }
-    
-    func make(_ category: TodoModel.Category, from json: [String: Any]) -> Todo {
-        // When adding new members to the Todo struct, provide defaults
-        // so that old save files will continue to work.
-        // Also so corrupt files will parse mostly correctly.
-        // (That hopefully shouldn't be needed though!)
-
-        let timeToDoMinutes: Double = json["timeToComplete"] as? Double ?? 0.0
-        let timeToDo: Time = Time(amount: timeToDoMinutes, unit: Time.TimeUnit.MINUTE)
-        
-        let name: String = json["name"] as? String ?? ""
-        
-        let tags: [String] = json["tags"] as? [String] ?? []
-        
-        let difficulty: Todo.TripleState = Todo.TripleState(from: json["difficulty"] as? String)
-                    
-        let importance: Todo.TripleState = Todo.TripleState(from: json["importance"] as? String)
-        
-        return Todo(
-            name: name,
-            category: category,
-            tags: tags,
-            timeToDo: timeToDo,
-            difficulty: difficulty,
-            importance: importance
-        )
-    }
-    
-    func makeDictionary(from todo: Todo) -> [String: Any] {
-        return [
-            "name" : todo.name,
-            "tags" : todo.tags,
-            "timeToComplete" : todo.timeToDo.get(in: Time.TimeUnit.MINUTE),
-            "importance" : "\(todo.importance)",
-            "difficulty" : "\(todo.difficulty)"
-        ]
+        //TODO: Connect todo.tags
     }
     
     func save(todos: [TodoModel.Category:[Todo]]) {
+        managedContext?.reset()
         for (category, specificTodos) in todos {
-            save(category: category, dictionary: specificTodos.map(makeDictionary))
+            for todo in specificTodos {
+                let _ = makeManagedObject(from: todo, category: category)
+            }
         }
-    }
-    
-    func save(category: TodoModel.Category, dictionary: [[String:Any]]) {
         do {
-            //Serialize the dictionary to a json (Data) object
-            let rawJSON: Data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
-            
-            //Write the data to the file save path
-            try rawJSON.write(to: urls[category]!)
+            try managedContext!.save()
         } catch {
-            print("Serialization error: \(error)")
+            fatalError("Failure to save context: \(error)")
         }
     }
 }
