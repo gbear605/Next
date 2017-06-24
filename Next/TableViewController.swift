@@ -35,10 +35,10 @@ class TableViewController: UITableViewController {
         // Hide the todo input controller
         dismiss(animated: true, completion: nil)
 
-        TodoModel.addGeneric(todo: todo)
+        TodoModel.add(todo.category, todo: todo)
         
         // Tell the table view it needs to show the todo appearing
-        tableView.insertRows(at: [IndexPath.init(row: TodoModel.numGenericTodos() - 1, section: 0)], with: .fade)
+        tableView.insertRows(at: [IndexPath.init(row: TodoModel.numTodos(category: TodoModel.Category.GENERIC) - 1, section: 0)], with: .fade)
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,13 +52,13 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TodoModel.numGenericTodos()
+        return TodoModel.numTodos(category: TodoModel.Category.GENERIC)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
 
-        cell.textLabel?.text = TodoModel.getGeneric(from: indexPath.row).name
+        cell.textLabel?.text = TodoModel.get(TodoModel.Category.GENERIC, from: indexPath.row).name
 
         return cell
     }
@@ -67,30 +67,30 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            TodoModel.removeGeneric(at: indexPath.row)
+            TodoModel.remove(TodoModel.Category.GENERIC, at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        let valueToMove = TodoModel.getGeneric(from: fromIndexPath.row)
+        let valueToMove = TodoModel.get(TodoModel.Category.GENERIC, from: fromIndexPath.row)
         
-        TodoModel.removeGeneric(at: fromIndexPath.row)
-        TodoModel.addGeneric(todo: valueToMove, at: to.row)
+        TodoModel.remove(TodoModel.Category.GENERIC, at: fromIndexPath.row)
+        TodoModel.add(TodoModel.Category.GENERIC, todo: valueToMove, at: to.row)
 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let todoViewController = TodoViewController()
-        print(TodoModel.numGenericTodos())
+        print(TodoModel.numTodos(category: TodoModel.Category.GENERIC))
         
         let navigationController = UINavigationController.init(rootViewController: todoViewController)
 
         
         self.navigationController?.present(navigationController, animated: true, completion: nil)
 
-        todoViewController.set(self, todo: TodoModel.getGeneric(from: indexPath.row))
+        todoViewController.set(self, todo: TodoModel.get(TodoModel.Category.GENERIC, from: indexPath.row))
         
     }
     

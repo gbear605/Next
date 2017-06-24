@@ -64,7 +64,7 @@ class TodoInputController: UIViewController {
             print("ERROR: A state was selected on the difficulty switch that shouldn't have been possible")
         }
         
-        table?.create(todo: Todo(name: name.text ?? "", tags: [tag.text ?? ""], timeToDo: time, difficulty: difficultyState ?? Todo.TripleState.LOW, importance: importanceState ?? Todo.TripleState.LOW))
+        table?.create(todo: Todo(name: name.text ?? "", category: .GENERIC, tags: [tag.text ?? ""], timeToDo: time, difficulty: difficultyState ?? Todo.TripleState.LOW, importance: importanceState ?? Todo.TripleState.LOW))
     }
 
 }

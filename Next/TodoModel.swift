@@ -2,39 +2,45 @@ import Foundation
 
 class TodoModel {
     
-    static var genericTodos: [Todo] = []
+    enum Category {
+        case GENERIC, DEPENDENT, NOW, LONGTERM, EVENT
+        
+        static let list: [Category] = [.GENERIC, .DEPENDENT, .NOW, .LONGTERM, .EVENT]
+    }
     
-    static func addGeneric(todo toAdd: Todo, at index: Int, save: Bool = true) {
-        genericTodos.insert(toAdd, at: index)
+    static var todos: [Category:[Todo]] = [.GENERIC:[], .DEPENDENT:[], .NOW:[], .LONGTERM:[], .EVENT:[]]
+    
+    static func add(_ category: Category, todo toAdd: Todo, at index: Int, save: Bool = true) {
+        todos[category]!.insert(toAdd, at: index)
         if save {
             saveTodos()
         }
     }
     
-    static func addGeneric(todo toAdd: Todo, save: Bool = true) {
-        genericTodos.append(toAdd)
+    static func add(_ category: Category, todo toAdd: Todo, save: Bool = true) {
+        todos[category]!.append(toAdd)
         if save {
             saveTodos()
         }
     }
     
-    static func numGenericTodos() -> Int {
-        return genericTodos.count
+    static func numTodos(category: Category) -> Int {
+        return todos[category]!.count
     }
     
-    static func getGeneric(from index: Int) -> Todo {
-        return genericTodos[index]
+    static func get(_ category: Category, from index: Int) -> Todo {
+        return todos[category]![index]
     }
     
-    static func removeGeneric(at index: Int, save: Bool = true) {
-        genericTodos.remove(at: index)
+    static func remove(_ category: Category, at index: Int, save: Bool = true) {
+        todos[category]!.remove(at: index)
         if save {
             saveTodos()
         }
     }
     
     static private func saveTodos() {
-        AppDelegate.dataManager?.save(todos: genericTodos)
+        AppDelegate.dataManager?.save(todos: todos)
     }
     
 }
@@ -42,9 +48,40 @@ class TodoModel {
 struct Todo {
     enum TripleState {
         case HIGH, MEDIUM, LOW, ERR
+        
+        init(from text: String) {
+            switch text {
+            case "HIGH":
+                self = .HIGH
+            case "MEDIUM":
+                self = .MEDIUM
+            case "LOW":
+                self = .LOW
+            default:
+                self = .ERR
+            }
+        }
+        
+        init(from text: String?) {
+            guard let text: String = text else {
+                self = .ERR
+                return
+            }
+            switch text {
+            case "HIGH":
+                self = .HIGH
+            case "MEDIUM":
+                self = .MEDIUM
+            case "LOW":
+                self = .LOW
+            default:
+                self = .ERR
+            }
+        }
     }
     
     let name: String
+    let category: TodoModel.Category
     let tags: [String]
     let timeToDo: Time
     let difficulty: TripleState

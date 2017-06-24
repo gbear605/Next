@@ -3,27 +3,38 @@ import UIKit
 
 class DataManager {
     
-    let url: URL = URL(fileURLWithPath: NSHomeDirectory())
-        .appendingPathComponent("Documents")
-        .appendingPathComponent("data.json")
+    static func getURL(for category: TodoModel.Category) -> URL {
+        //Get the url for a file in the application's document directory
+        // with a name like generic_data.json
+        return URL(fileURLWithPath: NSHomeDirectory())
+            .appendingPathComponent("Documents")
+            .appendingPathComponent("\("\(category)".lowercased())_data.json")
+    }
     
-    init() {
+    var urls: [TodoModel.Category: URL] = [:]
+    
+    func saveURL(for category: TodoModel.Category) {
+        let url = DataManager.getURL(for: category)
+        urls[category] = url
+    }
+    
+    func loadData(for category: TodoModel.Category) {
         do {
-            guard FileManager.default.fileExists(atPath: url.path) else {
+            guard FileManager.default.fileExists(atPath: urls[category]!.path) else {
                 // Make sure that the file exists
                 return
             }
             
             // Get the data from the file
-            let data = try Data(contentsOf: url)
+            let data = try Data(contentsOf: urls[category]!)
             
             // Turn the data into a dictionary of strings matching with anything
             let todos = try JSONSerialization.jsonObject(with: data, options: []) as! [[String: Any]]
             
             for todo in todos {
-                // Save is false so that todos aren't lost 
+                // Save is false so that todos aren't lost
                 // if the app crashes while this is happening
-                TodoModel.addGeneric(todo: makeTodo(from: todo), save: false)
+                TodoModel.add(category, todo: make(category, from: todo), save: false)
             }
         }
         catch {
@@ -31,7 +42,15 @@ class DataManager {
         }
     }
     
-    func makeTodo(from json: [String: Any]) -> Todo {
+    init() {
+        for category in TodoModel.Category.list {
+            saveURL(for: category)
+            loadData(for: category)
+        }
+        
+    }
+    
+    func make(_ category: TodoModel.Category, from json: [String: Any]) -> Todo {
         // When adding new members to the Todo struct, provide defaults
         // so that old save files will continue to work.
         // Also so corrupt files will parse mostly correctly.
@@ -44,36 +63,13 @@ class DataManager {
         
         let tags: [String] = json["tags"] as? [String] ?? []
         
-        let difficultyString: String = json["difficulty"] as? String ?? ""
-        
-        var difficulty: Todo.TripleState = .ERR
-        switch difficultyString {
-        case "HIGH":
-            difficulty = .HIGH
-        case "MEDIUM":
-            difficulty = .MEDIUM
-        case "LOW":
-            difficulty = .LOW
-        default:
-            break
-        }
-            
-        let importanceString: String = json["importance"] as? String ?? ""
-        
-        var importance: Todo.TripleState = .ERR
-        switch importanceString {
-        case "HIGH":
-            importance = .HIGH
-        case "MEDIUM":
-            importance = .MEDIUM
-        case "LOW":
-            importance = .LOW
-        default:
-            break
-        }
+        let difficulty: Todo.TripleState = Todo.TripleState(from: json["difficulty"] as? String)
+                    
+        let importance: Todo.TripleState = Todo.TripleState(from: json["importance"] as? String)
         
         return Todo(
             name: name,
+            category: category,
             tags: tags,
             timeToDo: timeToDo,
             difficulty: difficulty,
@@ -91,17 +87,19 @@ class DataManager {
         ]
     }
     
-    func save(todos: [Todo]) {
-        save(dictionary: todos.map(makeDictionary))
+    func save(todos: [TodoModel.Category:[Todo]]) {
+        for (category, specificTodos) in todos {
+            save(category: category, dictionary: specificTodos.map(makeDictionary))
+        }
     }
     
-    func save(dictionary: [[String:Any]]) {
+    func save(category: TodoModel.Category, dictionary: [[String:Any]]) {
         do {
             //Serialize the dictionary to a json (Data) object
             let rawJSON: Data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
             
             //Write the data to the file save path
-            try rawJSON.write(to: url)
+            try rawJSON.write(to: urls[category]!)
         } catch {
             print("Serialization error: \(error)")
         }
