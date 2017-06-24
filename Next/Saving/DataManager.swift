@@ -1,7 +1,10 @@
 import Foundation
 import UIKit
+import CoreData
 
-class DataManager {
+class DataManager: NSObject {
+    
+    var persistentContainer: NSPersistentContainer
     
     static func getURL(for category: TodoModel.Category) -> URL {
         //Get the url for a file in the application's document directory
@@ -42,7 +45,15 @@ class DataManager {
         }
     }
     
-    init() {
+    init(completionClosure: @escaping () -> ()) {
+        persistentContainer = NSPersistentContainer(name: "DataModel")
+        persistentContainer.loadPersistentStores() { (description, error) in
+            if let error = error {
+                fatalError("Failed to load Core Data stack: \(error)")
+            }
+            completionClosure()
+        }
+        
         for category in TodoModel.Category.list {
             saveURL(for: category)
             loadData(for: category)

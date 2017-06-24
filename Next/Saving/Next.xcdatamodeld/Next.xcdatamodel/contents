@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13154.26" systemVersion="" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DependentTodo" representedClassName="DependentTodoMO" parentEntity="Todo" syncable="YES" codeGenerationType="class"/>
+    <entity name="EventTodo" representedClassName="EventTodoMO" parentEntity="Todo" syncable="YES" codeGenerationType="class"/>
+    <entity name="GenericTodo" representedClassName="GenericTodoMO" parentEntity="Todo" syncable="YES" codeGenerationType="class"/>
+    <entity name="LongtermTodo" representedClassName="LongtermTodoMO" parentEntity="Todo" syncable="YES" codeGenerationType="class"/>
+    <entity name="NowTodo" representedClassName="NowTodoMO" parentEntity="Todo" syncable="YES" codeGenerationType="class"/>
+    <entity name="Tag" representedClassName="TagMO" syncable="YES" codeGenerationType="class"/>
+    <entity name="Todo" representedClassName="TodoMO" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="difficulty" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="importance" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="timeToDo" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Todo" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="GenericTodo" positionX="99" positionY="-63" width="128" height="45"/>
+        <element name="DependentTodo" positionX="99" positionY="27" width="128" height="43"/>
+        <element name="NowTodo" positionX="97" positionY="72" width="128" height="43"/>
+        <element name="EventTodo" positionX="97" positionY="117" width="128" height="43"/>
+        <element name="LongtermTodo" positionX="99" positionY="-16" width="128" height="43"/>
+        <element name="Tag" positionX="-63" positionY="119" width="128" height="43"/>
+    </elements>
+</model>
