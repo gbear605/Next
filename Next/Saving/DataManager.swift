@@ -33,7 +33,6 @@ class DataManager: NSObject {
     
     func loadData(for category: TodoModel.Category) {
         for todo in load(category) {
-            print("Here6")
             // Save is false so that todos aren't lost
             // if the app crashes while this is happening
             TodoModel.add(category, todo: convert(managedTodo: todo), save: false)
@@ -46,7 +45,6 @@ class DataManager: NSObject {
     
     func load(_ category: TodoModel.Category) -> [TodoMO]{
         let todoFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "\("\(category)".capitalized)Todo")
-        print("\(managedContext!.persistentStoreCoordinator)")
         do {
             return try managedContext!.fetch(todoFetch) as! [TodoMO]
         } catch {
