@@ -24,6 +24,7 @@
 		85C7D50B1EEB6A27006D6F8F /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C7D5091EEB6A27006D6F8F /* Dimension.swift */; };
 		85C7D50C1EEB6A27006D6F8F /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C7D50A1EEB6A27006D6F8F /* Unit.swift */; };
 		85CDA0781EDB036400C727D7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CDA0771EDB036400C727D7 /* DataManager.swift */; };
+		85D0ADA11F006DDD00DC15CE /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D0ADA01F006DDD00DC15CE /* Todo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		85C7D5091EEB6A27006D6F8F /* Dimension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dimension.swift; path = "../../../BMI Calculator/BMI Calculator/Dimension.swift"; sourceTree = "<group>"; };
 		85C7D50A1EEB6A27006D6F8F /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Unit.swift; path = "../../../BMI Calculator/BMI Calculator/Unit.swift"; sourceTree = "<group>"; };
 		85CDA0771EDB036400C727D7 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		85D0ADA01F006DDD00DC15CE /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,14 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		856D964F1EFE1C2B00EACBD1 /* Saving */ = {
+		856D964F1EFE1C2B00EACBD1 /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
 				856D96521EFE20D300EACBD1 /* Next.xcdatamodeld */,
 				85CDA0771EDB036400C727D7 /* DataManager.swift */,
+				85A3B0471EBF4DB600BA2111 /* TodoModel.swift */,
 				856D96841EFE280B00EACBD1 /* InfoOnDataModel.md */,
 			);
-			path = Saving;
+			path = DataStorage;
 			sourceTree = "<group>";
 		};
 		85C16F0F1EA92C3D00F1A707 = {
@@ -110,7 +113,7 @@
 		85C16F1A1EA92C3D00F1A707 /* Next */ = {
 			isa = PBXGroup;
 			children = (
-				856D964F1EFE1C2B00EACBD1 /* Saving */,
+				856D964F1EFE1C2B00EACBD1 /* DataStorage */,
 				85C7D5081EEB6A18006D6F8F /* Units */,
 				85C16F1B1EA92C3D00F1A707 /* AppDelegate.swift */,
 				85C16F1F1EA92C3D00F1A707 /* NextViewController.swift */,
@@ -123,7 +126,7 @@
 				85C16F3F1EA93BC700F1A707 /* TodoInputController.swift */,
 				850561971ED6036C00A08A95 /* TodoViewController.xib */,
 				85C16F401EA93BC700F1A707 /* TodoInputController.xib */,
-				85A3B0471EBF4DB600BA2111 /* TodoModel.swift */,
+				85D0ADA01F006DDD00DC15CE /* Todo.swift */,
 			);
 			path = Next;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				85C16F411EA93BC700F1A707 /* TodoInputController.swift in Sources */,
 				85CDA0781EDB036400C727D7 /* DataManager.swift in Sources */,
 				85C7D50C1EEB6A27006D6F8F /* Unit.swift in Sources */,
+				85D0ADA11F006DDD00DC15CE /* Todo.swift in Sources */,
 				85C7D5071EEB69FC006D6F8F /* Time.swift in Sources */,
 				85A3B0481EBF4DB600BA2111 /* TodoModel.swift in Sources */,
 				850561961ED6022F00A08A95 /* TodoViewController.swift in Sources */,

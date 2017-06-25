@@ -5,20 +5,16 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    static var dataManager: DataManager?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        AppDelegate.dataManager = DataManager()
-        AppDelegate.dataManager!.persistentContainer.loadPersistentStores() { (description, error) in
+        DataManager.singleton.persistentContainer.loadPersistentStores() { (description, error) in
             if let error = error {
                 fatalError("Failed to load Core Data stack: \(error)")
             }
-            AppDelegate.dataManager!.managedContext = AppDelegate.dataManager!.persistentContainer.viewContext
+            DataManager.singleton.managedContext = DataManager.singleton.persistentContainer.viewContext
             for category in TodoModel.Category.list {
-                AppDelegate.dataManager!.loadData(for: category)
+                DataManager.singleton.loadData(for: category)
             }
         }
         
