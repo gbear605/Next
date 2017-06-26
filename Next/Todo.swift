@@ -70,16 +70,15 @@ class Todo {
         }
     }
     
-    private static func makeManagedObject(name: String, category: TodoModel.Category, tags: [String], timeToDo: Time, difficulty: TripleState, importance: TripleState) -> TodoMO {
+    private static func makeManagedObject(name: String, category: TodoModel.Category, tags: [TagMO], timeToDo: Time, difficulty: TripleState, importance: TripleState) -> TodoMO {
         let managedTodo: TodoMO = NSEntityDescription.insertNewObject(forEntityName: "\("\(category)".capitalized)Todo", into: DataManager.singleton.managedContext!) as! TodoMO
         managedTodo.name = name
         managedTodo.timeToDo = timeToDo.get(in: Time.TimeUnit.MINUTE)
         managedTodo.difficulty = difficulty.toInt()
         managedTodo.importance = importance.toInt()
+        managedTodo.addToTags(NSSet(array: tags))
         DataManager.singleton.save()
         return managedTodo
-        
-        //TODO: Connect todo.tags
     }
     
     init(managedTodo: TodoMO) {
@@ -103,11 +102,11 @@ class Todo {
         self.timeToDo = Time(amount: managedTodo.timeToDo, unit: Time.TimeUnit.MINUTE)
         self.difficulty = TripleState(from: managedTodo.difficulty)
         self.importance = TripleState(from: managedTodo.importance)
-        self.tags = []
+        self.tags = managedTodo.tags?.allObjects as! [TagMO]
         
     }
     
-    init(name: String, category: TodoModel.Category, tags: [String], timeToDo: Time, difficulty: TripleState, importance: TripleState) {
+    init(name: String, category: TodoModel.Category, tags: [TagMO], timeToDo: Time, difficulty: TripleState, importance: TripleState) {
         self.name = name
         self.category = category
         self.tags = tags
@@ -119,7 +118,7 @@ class Todo {
     
     let name: String
     let category: TodoModel.Category
-    let tags: [String]
+    let tags: [TagMO]
     let timeToDo: Time
     let difficulty: TripleState
     let importance: TripleState

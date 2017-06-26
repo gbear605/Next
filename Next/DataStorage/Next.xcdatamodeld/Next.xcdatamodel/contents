@@ -5,7 +5,9 @@
     <entity name="GenericTodo" representedClassName="GenericTodoMO" parentEntity="Todo" syncable="YES" codeGenerationType="class"/>
     <entity name="LongtermTodo" representedClassName="LongtermTodoMO" parentEntity="Todo" syncable="YES" codeGenerationType="class"/>
     <entity name="NowTodo" representedClassName="NowTodoMO" parentEntity="Todo" syncable="YES" codeGenerationType="class"/>
-    <entity name="Tag" representedClassName="TagMO" syncable="YES" codeGenerationType="class"/>
+    <entity name="Tag" representedClassName="TagMO" syncable="YES">
+        <attribute name="text" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Todo" representedClassName="TodoMO" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="difficulty" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="importance" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -14,12 +16,12 @@
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Todo" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="DependentTodo" positionX="99" positionY="27" width="128" height="45"/>
+        <element name="EventTodo" positionX="97" positionY="117" width="128" height="45"/>
         <element name="GenericTodo" positionX="99" positionY="-63" width="128" height="45"/>
-        <element name="DependentTodo" positionX="99" positionY="27" width="128" height="43"/>
-        <element name="NowTodo" positionX="97" positionY="72" width="128" height="43"/>
-        <element name="EventTodo" positionX="97" positionY="117" width="128" height="43"/>
-        <element name="LongtermTodo" positionX="99" positionY="-16" width="128" height="43"/>
-        <element name="Tag" positionX="-63" positionY="119" width="128" height="43"/>
+        <element name="LongtermTodo" positionX="99" positionY="-16" width="128" height="45"/>
+        <element name="NowTodo" positionX="97" positionY="72" width="128" height="45"/>
+        <element name="Tag" positionX="-63" positionY="119" width="128" height="60"/>
+        <element name="Todo" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

@@ -34,9 +34,11 @@ class TodoViewController: UIViewController {
         // Once we implement multiple tags per todo, we will need to join them
         // with a separator
         tagLabel.text = "No tag"
-        let tagText = todo.tags.joined()
-        if tagText != "" {
-            tagLabel.text = "Tag: " + tagText
+        if todo.tags.count > 0 {
+            let tagText = todo.tags[0].text
+            if tagText != "" {
+                tagLabel.text = "Tag: " + tagText
+            }
         }
         
         timeToDoLabel.text = "No time"

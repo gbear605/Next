@@ -25,6 +25,7 @@
 		85C7D50C1EEB6A27006D6F8F /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C7D50A1EEB6A27006D6F8F /* Unit.swift */; };
 		85CDA0781EDB036400C727D7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CDA0771EDB036400C727D7 /* DataManager.swift */; };
 		85D0ADA11F006DDD00DC15CE /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D0ADA01F006DDD00DC15CE /* Todo.swift */; };
+		85D0ADA31F0094CE00DC15CE /* TagMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D0ADA21F0094CE00DC15CE /* TagMO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		85C7D50A1EEB6A27006D6F8F /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Unit.swift; path = "../../../BMI Calculator/BMI Calculator/Unit.swift"; sourceTree = "<group>"; };
 		85CDA0771EDB036400C727D7 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		85D0ADA01F006DDD00DC15CE /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		85D0ADA21F0094CE00DC15CE /* TagMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				85CDA0771EDB036400C727D7 /* DataManager.swift */,
 				85A3B0471EBF4DB600BA2111 /* TodoModel.swift */,
 				856D96841EFE280B00EACBD1 /* InfoOnDataModel.md */,
+				85D0ADA21F0094CE00DC15CE /* TagMO.swift */,
 			);
 			path = DataStorage;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				85CDA0781EDB036400C727D7 /* DataManager.swift in Sources */,
 				85C7D50C1EEB6A27006D6F8F /* Unit.swift in Sources */,
 				85D0ADA11F006DDD00DC15CE /* Todo.swift in Sources */,
+				85D0ADA31F0094CE00DC15CE /* TagMO.swift in Sources */,
 				85C7D5071EEB69FC006D6F8F /* Time.swift in Sources */,
 				85A3B0481EBF4DB600BA2111 /* TodoModel.swift in Sources */,
 				850561961ED6022F00A08A95 /* TodoViewController.swift in Sources */,
