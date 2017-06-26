@@ -38,7 +38,7 @@ class TodoInputController: UIViewController {
         
         let time: Time = Time(amount: minutesNum + Time.TimeUnit.MINUTES_PER_HOUR * hoursNum, unit: Time.TimeUnit.MINUTE)
         
-        var importanceState: Todo.TripleState? = nil
+        var importanceState: Todo.TripleState = .ERR
         
         switch importance.selectedSegmentIndex {
         case 0:
@@ -48,10 +48,10 @@ class TodoInputController: UIViewController {
         case 2:
             importanceState = .HIGH
         default:
-            print("ERROR: A state was selected on the importance switch that shouldn't have been possible")
+            fatalError("ERROR: A state was selected on the importance switch that shouldn't have been possible")
         }
         
-        var difficultyState: Todo.TripleState? = nil
+        var difficultyState: Todo.TripleState = .ERR
         
         switch difficulty.selectedSegmentIndex {
         case 0:
@@ -61,10 +61,16 @@ class TodoInputController: UIViewController {
         case 2:
             difficultyState = .HIGH
         default:
-            print("ERROR: A state was selected on the difficulty switch that shouldn't have been possible")
+            fatalError("ERROR: A state was selected on the difficulty switch that shouldn't have been possible")
         }
         
-        table?.create(todo: Todo(name: name.text ?? "", category: .GENERIC, tags: [TagMO.create(tag.text ?? "")], timeToDo: time, difficulty: difficultyState ?? Todo.TripleState.LOW, importance: importanceState ?? Todo.TripleState.LOW))
+        table?.create(todo: Todo(name: name.text ?? "",
+                                 category: .GENERIC,
+                                 tags: [TagMO.create(tag.text ?? "")],
+                                 timeToDo: time,
+                                 difficulty: difficultyState,
+                                 importance: importanceState,
+                                 displayOrder: Int32(TodoModel.numTodos(category: .GENERIC))))
     }
 
 }

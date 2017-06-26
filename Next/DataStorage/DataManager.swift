@@ -23,6 +23,10 @@ class DataManager: NSObject {
     
     func load(_ category: TodoModel.Category) -> [TodoMO]{
         let todoFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "\("\(category)".capitalized)Todo")
+        if todoFetch.sortDescriptors == nil {
+            todoFetch.sortDescriptors = []
+        }
+        todoFetch.sortDescriptors!.append(NSSortDescriptor(key: "displayOrder", ascending: true))
         do {
             return try managedContext!.fetch(todoFetch) as! [TodoMO]
         } catch {

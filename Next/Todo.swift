@@ -70,12 +70,13 @@ class Todo {
         }
     }
     
-    private static func makeManagedObject(name: String, category: TodoModel.Category, tags: [TagMO], timeToDo: Time, difficulty: TripleState, importance: TripleState) -> TodoMO {
+    private static func makeManagedObject(name: String, category: TodoModel.Category, tags: [TagMO], timeToDo: Time, difficulty: TripleState, importance: TripleState, displayOrder: Int32) -> TodoMO {
         let managedTodo: TodoMO = NSEntityDescription.insertNewObject(forEntityName: "\("\(category)".capitalized)Todo", into: DataManager.singleton.managedContext!) as! TodoMO
         managedTodo.name = name
         managedTodo.timeToDo = timeToDo.get(in: Time.TimeUnit.MINUTE)
         managedTodo.difficulty = difficulty.toInt()
         managedTodo.importance = importance.toInt()
+        managedTodo.displayOrder = displayOrder
         managedTodo.addToTags(NSSet(array: tags))
         DataManager.singleton.save()
         return managedTodo
@@ -106,14 +107,14 @@ class Todo {
         
     }
     
-    init(name: String, category: TodoModel.Category, tags: [TagMO], timeToDo: Time, difficulty: TripleState, importance: TripleState) {
+    init(name: String, category: TodoModel.Category, tags: [TagMO], timeToDo: Time, difficulty: TripleState, importance: TripleState, displayOrder: Int32) {
         self.name = name
         self.category = category
         self.tags = tags
         self.timeToDo = timeToDo
         self.difficulty = difficulty
         self.importance = importance
-        self.managedTodo = Todo.makeManagedObject(name: name, category: category, tags: tags, timeToDo: timeToDo, difficulty: difficulty, importance: importance)
+        self.managedTodo = Todo.makeManagedObject(name: name, category: category, tags: tags, timeToDo: timeToDo, difficulty: difficulty, importance: importance, displayOrder: displayOrder)
     }
     
     let name: String
@@ -123,4 +124,14 @@ class Todo {
     let difficulty: TripleState
     let importance: TripleState
     let managedTodo: TodoMO
+    
+    var displayOrder: Int {
+        get {
+            return Int(managedTodo.displayOrder)
+        }
+        
+        set(x){
+            managedTodo.displayOrder = Int32(x)
+        }
+    }
 }
