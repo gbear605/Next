@@ -67,23 +67,18 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            TodoModel.remove(TodoModel.Category.GENERIC, at: indexPath.row)
+            TodoModel.delete(TodoModel.Category.GENERIC, at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        let valueToMove = TodoModel.get(TodoModel.Category.GENERIC, from: fromIndexPath.row)
-        
-        TodoModel.remove(TodoModel.Category.GENERIC, at: fromIndexPath.row)
-        TodoModel.add(TodoModel.Category.GENERIC, todo: valueToMove, at: to.row)
-
+        TodoModel.move(TodoModel.Category.GENERIC, from: fromIndexPath.row, to: to.row)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let todoViewController = TodoViewController()
-        print(TodoModel.numTodos(category: TodoModel.Category.GENERIC))
         
         let navigationController = UINavigationController.init(rootViewController: todoViewController)
 

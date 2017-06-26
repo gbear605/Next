@@ -30,6 +30,26 @@ class NextTests: XCTestCase {
         XCTAssert(time2Hours20Minutes.string == "2 hours and 20 minutes")
     }
     
+    
+    
+    private func testTodosForLegalDisplayOrder(todos: [Todo]) {
+        var checklist: [Bool] = Array(repeating: false, count: todos.count)
+        for todo: Todo in todos {
+            if todo.displayOrder >= todos.count {
+                XCTAssert(false, "Todo \(todo) display order is \(todo.displayOrder) which is greater than or equal to the number of todos which is \(todos.count)")
+            } else {
+                if checklist[todo.displayOrder] == true {
+                    XCTAssert(false, "Todo \(todo) display order is \(todo.displayOrder) which is the same as a different todo")
+                } else {
+                    checklist[todo.displayOrder] = true
+                }
+            }
+        }
+        for check in checklist {
+            XCTAssert(check == true, "Not all items in the checklist are checked")
+        }
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
