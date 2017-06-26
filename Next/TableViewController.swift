@@ -79,7 +79,6 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let todoViewController = TodoViewController()
-        print(TodoModel.numTodos(category: TodoModel.Category.GENERIC))
         
         let navigationController = UINavigationController.init(rootViewController: todoViewController)
 

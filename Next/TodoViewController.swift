@@ -11,8 +11,6 @@ class TodoViewController: UIViewController {
     @IBOutlet weak var importanceLabel: UILabel!
     @IBOutlet weak var difficultyLabel: UILabel!
     
-    @IBOutlet weak var displayOrderLabel: UILabel!
-    
     func set(_ table: TableViewController, todo: Todo) {
         self.table = table
         self.todo = todo
@@ -56,8 +54,6 @@ class TodoViewController: UIViewController {
         difficultyLabel.text = "No difficulty"
         let difficultyValue: Todo.TripleState = todo.difficulty
         difficultyLabel.text = "Difficulty: " + "\(difficultyValue)".capitalized
-        
-        displayOrderLabel.text = "DisplayOrder: \(todo.displayOrder)"
     }
     
     override func didReceiveMemoryWarning() {

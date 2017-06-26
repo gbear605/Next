@@ -34,7 +34,7 @@ class NextTests: XCTestCase {
     
     private func testTodosForLegalDisplayOrder(todos: [Todo]) {
         var checklist: [Bool] = Array(repeating: false, count: todos.count)
-        for todo in todos {
+        for todo: Todo in todos {
             if todo.displayOrder >= todos.count {
                 XCTAssert(false, "Todo \(todo) display order is \(todo.displayOrder) which is greater than or equal to the number of todos which is \(todos.count)")
             } else {

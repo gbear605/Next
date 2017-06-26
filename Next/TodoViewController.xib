@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TodoViewController" customModule="Next" customModuleProvider="target">
             <connections>
                 <outlet property="difficultyLabel" destination="Gf7-cq-dFX" id="ak5-EB-eak"/>
-                <outlet property="displayOrderLabel" destination="OhI-to-Orz" id="8pu-gf-iAp"/>
                 <outlet property="importanceLabel" destination="Dsv-PP-j7h" id="Ern-Uc-C4z"/>
                 <outlet property="tagLabel" destination="ChT-nU-Huk" id="sX8-GW-LVv"/>
                 <outlet property="timeToDoLabel" destination="xJI-DR-Qja" id="Vwu-8I-lth"/>
@@ -48,12 +47,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DisplayOrder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhI-to-Orz">
-                    <rect key="frame" x="16" y="186" width="343" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -61,8 +54,6 @@
                 <constraint firstItem="Gf7-cq-dFX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="1tF-Ij-0FI"/>
                 <constraint firstAttribute="trailing" secondItem="Dsv-PP-j7h" secondAttribute="trailing" constant="16" id="5o4-d5-6Qp"/>
                 <constraint firstItem="ChT-nU-Huk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Brw-uY-MZg"/>
-                <constraint firstItem="OhI-to-Orz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="MQM-b2-CDr"/>
-                <constraint firstItem="OhI-to-Orz" firstAttribute="top" secondItem="Gf7-cq-dFX" secondAttribute="bottom" constant="8" id="PEI-gg-8PK"/>
                 <constraint firstItem="Dsv-PP-j7h" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RGb-Ww-YOZ"/>
                 <constraint firstAttribute="trailing" secondItem="Gf7-cq-dFX" secondAttribute="trailing" constant="16" id="Rhf-5q-WHq"/>
                 <constraint firstItem="xJI-DR-Qja" firstAttribute="top" secondItem="ChT-nU-Huk" secondAttribute="bottom" constant="8" id="Tq1-Q4-sQw"/>
@@ -70,12 +61,10 @@
                 <constraint firstItem="Dsv-PP-j7h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="VDu-aK-CIy"/>
                 <constraint firstItem="Gf7-cq-dFX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XVo-xJ-jmh"/>
                 <constraint firstItem="ChT-nU-Huk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="d1P-xG-wv5"/>
-                <constraint firstItem="OhI-to-Orz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fAv-vg-Xfv"/>
                 <constraint firstItem="Dsv-PP-j7h" firstAttribute="top" secondItem="xJI-DR-Qja" secondAttribute="bottom" constant="8" id="g7I-A4-Dfo"/>
                 <constraint firstItem="xJI-DR-Qja" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="gIh-rR-yhu"/>
                 <constraint firstAttribute="trailing" secondItem="ChT-nU-Huk" secondAttribute="trailing" constant="16" id="oBD-8z-cPl"/>
                 <constraint firstAttribute="trailing" secondItem="xJI-DR-Qja" secondAttribute="trailing" constant="16" id="tlc-Nd-kWh"/>
-                <constraint firstAttribute="trailing" secondItem="OhI-to-Orz" secondAttribute="trailing" constant="16" id="uJL-dr-Ihp"/>
                 <constraint firstItem="ChT-nU-Huk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="70" id="znq-2b-Rxe"/>
             </constraints>
             <point key="canvasLocation" x="39.5" y="22.5"/>
