@@ -12,6 +12,24 @@ class TodoModel {
     
     private var todos: [Category:[Todo]] = [.GENERIC:[], .DEPENDENT:[], .NOW:[], .LONGTERM:[], .EVENT:[]]
     
+    private var additionListeners: [Category:[(Todo) -> ()]] = [.GENERIC:[], .DEPENDENT:[], .NOW:[], .LONGTERM:[], .EVENT:[]]
+    
+    func addAdditionListener(for category: Category, f: @escaping (Todo) -> ()) {
+        additionListeners[category]?.append(f)
+    }
+    
+    func addAdditionListener(f: @escaping (Todo) -> ()) {
+        for category in Category.list {
+            additionListeners[category]?.append(f)
+        }
+    }
+    
+    func callAdditionListeners(category: Category, todo: Todo) {
+        for listener in additionListeners[category]! {
+            listener(todo)
+        }
+    }
+    
     func add(todo toAdd: Todo, at index: Int = -1) {
         if index == -1 {
             toAdd.displayOrder = numTodos(category: toAdd.category)
@@ -21,6 +39,7 @@ class TodoModel {
             move(toAdd.category, from: numTodos(category: toAdd.category) - 1, to: index)
         }
         DataManager.singleton.save()
+        callAdditionListeners(category: toAdd.category, todo: toAdd)
     }
     
     func move(_ category: Category, from indexFrom: Int, to indexTo: Int) {
