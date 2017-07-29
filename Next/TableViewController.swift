@@ -35,10 +35,10 @@ class TableViewController: UITableViewController {
         // Hide the todo input controller
         dismiss(animated: true, completion: nil)
 
-        TodoModel.add(todo.category, todo: todo)
+        TodoModel.singleton.add(todo: todo)
         
         // Tell the table view it needs to show the todo appearing
-        tableView.insertRows(at: [IndexPath.init(row: TodoModel.numTodos(category: TodoModel.Category.GENERIC) - 1, section: 0)], with: .fade)
+        tableView.insertRows(at: [IndexPath.init(row: TodoModel.singleton.numTodos(category: TodoModel.Category.GENERIC) - 1, section: 0)], with: .fade)
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,13 +52,13 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TodoModel.numTodos(category: TodoModel.Category.GENERIC)
+        return TodoModel.singleton.numTodos(category: TodoModel.Category.GENERIC)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
 
-        cell.textLabel?.text = TodoModel.get(TodoModel.Category.GENERIC, from: indexPath.row).name
+        cell.textLabel?.text = TodoModel.singleton.get(TodoModel.Category.GENERIC, from: indexPath.row).name
 
         return cell
     }
@@ -67,14 +67,14 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            TodoModel.delete(TodoModel.Category.GENERIC, at: indexPath.row)
+            TodoModel.singleton.delete(TodoModel.Category.GENERIC, at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        TodoModel.move(TodoModel.Category.GENERIC, from: fromIndexPath.row, to: to.row)
+        TodoModel.singleton.move(TodoModel.Category.GENERIC, from: fromIndexPath.row, to: to.row)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -85,7 +85,7 @@ class TableViewController: UITableViewController {
         
         self.navigationController?.present(navigationController, animated: true, completion: nil)
 
-        todoViewController.set(self, todo: TodoModel.get(TodoModel.Category.GENERIC, from: indexPath.row))
+        todoViewController.set(self, todo: TodoModel.singleton.get(TodoModel.Category.GENERIC, from: indexPath.row))
         
     }
     

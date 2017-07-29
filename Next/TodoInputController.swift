@@ -70,7 +70,7 @@ class TodoInputController: UIViewController {
                                  timeToDo: time,
                                  difficulty: difficultyState,
                                  importance: importanceState,
-                                 displayOrder: Int32(TodoModel.numTodos(category: .GENERIC))))
+                                 displayOrder: Int32(TodoModel.singleton.numTodos(category: .GENERIC))))
     }
 
 }

@@ -20,9 +20,6 @@
 		85C16F3E1EA92FDD00F1A707 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C16F3D1EA92FDD00F1A707 /* TableViewController.swift */; };
 		85C16F411EA93BC700F1A707 /* TodoInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C16F3F1EA93BC700F1A707 /* TodoInputController.swift */; };
 		85C16F421EA93BC700F1A707 /* TodoInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85C16F401EA93BC700F1A707 /* TodoInputController.xib */; };
-		85C7D5071EEB69FC006D6F8F /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C7D5061EEB69FC006D6F8F /* Time.swift */; };
-		85C7D50B1EEB6A27006D6F8F /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C7D5091EEB6A27006D6F8F /* Dimension.swift */; };
-		85C7D50C1EEB6A27006D6F8F /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C7D50A1EEB6A27006D6F8F /* Unit.swift */; };
 		85CDA0781EDB036400C727D7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CDA0771EDB036400C727D7 /* DataManager.swift */; };
 		85D0ADA11F006DDD00DC15CE /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D0ADA01F006DDD00DC15CE /* Todo.swift */; };
 		85D0ADA31F0094CE00DC15CE /* TagMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D0ADA21F0094CE00DC15CE /* TagMO.swift */; };
@@ -57,12 +54,12 @@
 		85C16F3D1EA92FDD00F1A707 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		85C16F3F1EA93BC700F1A707 /* TodoInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoInputController.swift; sourceTree = "<group>"; };
 		85C16F401EA93BC700F1A707 /* TodoInputController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoInputController.xib; sourceTree = "<group>"; };
-		85C7D5061EEB69FC006D6F8F /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
-		85C7D5091EEB6A27006D6F8F /* Dimension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dimension.swift; path = "../../../BMI Calculator/BMI Calculator/Dimension.swift"; sourceTree = "<group>"; };
-		85C7D50A1EEB6A27006D6F8F /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Unit.swift; path = "../../../BMI Calculator/BMI Calculator/Unit.swift"; sourceTree = "<group>"; };
 		85CDA0771EDB036400C727D7 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		85D0ADA01F006DDD00DC15CE /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		85D0ADA21F0094CE00DC15CE /* TagMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMO.swift; sourceTree = "<group>"; };
+		85F526A61F12AE6B00B6459C /* Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimension.swift; sourceTree = "<group>"; };
+		85F526A71F12AE6B00B6459C /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		85F526A81F12AE6B00B6459C /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,9 +143,9 @@
 		85C7D5081EEB6A18006D6F8F /* Units */ = {
 			isa = PBXGroup;
 			children = (
-				85C7D5061EEB69FC006D6F8F /* Time.swift */,
-				85C7D5091EEB6A27006D6F8F /* Dimension.swift */,
-				85C7D50A1EEB6A27006D6F8F /* Unit.swift */,
+				85F526A61F12AE6B00B6459C /* Dimension.swift */,
+				85F526A81F12AE6B00B6459C /* Time.swift */,
+				85F526A71F12AE6B00B6459C /* Unit.swift */,
 			);
 			path = Units;
 			sourceTree = "<group>";
@@ -264,13 +261,10 @@
 				856D96541EFE20D300EACBD1 /* Next.xcdatamodeld in Sources */,
 				85C16F201EA92C3D00F1A707 /* NextViewController.swift in Sources */,
 				85C16F3E1EA92FDD00F1A707 /* TableViewController.swift in Sources */,
-				85C7D50B1EEB6A27006D6F8F /* Dimension.swift in Sources */,
 				85C16F411EA93BC700F1A707 /* TodoInputController.swift in Sources */,
 				85CDA0781EDB036400C727D7 /* DataManager.swift in Sources */,
-				85C7D50C1EEB6A27006D6F8F /* Unit.swift in Sources */,
 				85D0ADA11F006DDD00DC15CE /* Todo.swift in Sources */,
 				85D0ADA31F0094CE00DC15CE /* TagMO.swift in Sources */,
-				85C7D5071EEB69FC006D6F8F /* Time.swift in Sources */,
 				85A3B0481EBF4DB600BA2111 /* TodoModel.swift in Sources */,
 				850561961ED6022F00A08A95 /* TodoViewController.swift in Sources */,
 				85C16F1C1EA92C3D00F1A707 /* AppDelegate.swift in Sources */,

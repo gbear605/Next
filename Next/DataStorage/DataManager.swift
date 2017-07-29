@@ -11,9 +11,7 @@ class DataManager: NSObject {
     
     func loadData(for category: TodoModel.Category) {
         for todo in load(category) {
-            // Save is false so that todos aren't lost
-            // if the app crashes while this is happening
-            TodoModel.add(category, todo: Todo(managedTodo: todo))
+            TodoModel.singleton.add(todo: Todo(managedTodo: todo))
         }
     }
     
@@ -21,12 +19,15 @@ class DataManager: NSObject {
         persistentContainer = NSPersistentContainer(name: "Next")
     }
     
-    func load(_ category: TodoModel.Category) -> [TodoMO]{
+    func load(_ category: TodoModel.Category) -> [TodoMO] {
+        // We want to load all of the entitites that are todos.
+        // Todo entities have a name structure that looks like GenericTodo or EventTodo
         let todoFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "\("\(category)".capitalized)Todo")
-        if todoFetch.sortDescriptors == nil {
-            todoFetch.sortDescriptors = []
-        }
-        todoFetch.sortDescriptors!.append(NSSortDescriptor(key: "displayOrder", ascending: true))
+        
+        // We want to load them in display order
+        todoFetch.sortDescriptors = [NSSortDescriptor(key: "displayOrder", ascending: true)]
+        
+        // Then actually load all the todos as an array of managed todos.
         do {
             return try managedContext!.fetch(todoFetch) as! [TodoMO]
         } catch {

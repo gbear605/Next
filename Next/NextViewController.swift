@@ -17,9 +17,9 @@ class NextViewController: UIViewController {
     @IBAction func next(_ sender: UIButton) {
         var flagTodosToPickFrom = false
         for category in TodoModel.Category.list {
-            if TodoModel.numTodos(category: category) > 0 {
+            if TodoModel.singleton.numTodos(category: category) > 0 {
                 flagTodosToPickFrom = true
-                nextLabel.text = TodoModel.get(category, from: 0).name
+                nextLabel.text = TodoModel.singleton.get(category, from: 0).name
             }
         }
         if !flagTodosToPickFrom {
