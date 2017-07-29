@@ -131,7 +131,7 @@
         <!--Generic-->
         <scene sceneID="ug5-Ee-Etq">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="FFf-Nn-sEy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FFf-Nn-sEy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Generic" image="first" id="KCb-nn-DH7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hVS-HM-e9E">
@@ -139,6 +139,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="e02-2e-jX0">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="oOk-VS-tIl" kind="relationship" relationship="rootViewController" id="gW8-Oc-Iyn"/>
                     </connections>
