@@ -1,8 +1,12 @@
 import UIKit
 
+protocol CanViewTodos {
+    func finishLookingInDetail()
+}
+
 class TodoViewController: UIViewController {
     
-    var table: TableViewController? = nil
+    var table: CanViewTodos? = nil
     
     var todo: Todo? = nil
     
@@ -11,7 +15,7 @@ class TodoViewController: UIViewController {
     @IBOutlet weak var importanceLabel: UILabel!
     @IBOutlet weak var difficultyLabel: UILabel!
     
-    func set(_ table: TableViewController, todo: Todo) {
+    func set(_ table: CanViewTodos, todo: Todo) {
         self.table = table
         self.todo = todo
         

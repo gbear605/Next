@@ -1,12 +1,15 @@
 import UIKit
 
-class NextViewController: UIViewController {
+class NextViewController: UIViewController, CanViewTodos {
+    func finishLookingInDetail() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        TodoModel.singleton.addAdditionListener {_ in
-            print("here")
+        TodoModel.singleton.addUpdateListener {_ in
             self.ignoring.removeAll()
         }
     }
@@ -14,13 +17,13 @@ class NextViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        TodoModel.singleton.addAdditionListener {_ in
-            print("here")
+        TodoModel.singleton.addUpdateListener {_ in
             self.ignoring.removeAll()
         }
     }
     
-    @IBOutlet weak var nextLabel: UILabel!
+    
+    @IBOutlet weak var nextLabel: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,15 +78,29 @@ class NextViewController: UIViewController {
         }
     }
     
+    var currentlyVisibleTodo: Todo? = nil
+    
     @IBAction func next(_ sender: UIButton) {
+        currentlyVisibleTodo = nextTodo
         if let nextTodo = nextTodo {
             addNewIgnoring(todo: nextTodo)
-            nextLabel.text = nextTodo.name
-            
+            nextLabel.setTitle(nextTodo.name, for: .normal)
         } else {
-            nextLabel.text = "Make a todo!"
+            nextLabel.setTitle("Make a todo", for: .normal)
         }
     }
+    
+    @IBAction func view(_ sender: UIButton) {
+        guard let currentlyVisibleTodo = currentlyVisibleTodo else { return }
+        let todoViewController = TodoViewController()
+        
+        let navigationController = UINavigationController.init(rootViewController: todoViewController)
+        
+        self.present(navigationController, animated: true, completion: nil)
+        todoViewController.set(self, todo: currentlyVisibleTodo)
+        
+    }
+    
     
 }
 
