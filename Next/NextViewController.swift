@@ -56,7 +56,7 @@ class NextViewController: UIViewController {
         
         let numToDrop = max(0, min(1 + numToIgnore - todos.count, ignoring.count - 1))
         let toIgnore = Array(ignoring.dropFirst(numToDrop))
-        print("Ignoring: \(toIgnore.map({(todo) in todo.name}))")
+        
         return Todo.findOptimalTodo(from: todos, ignoring: toIgnore)
     }
     
