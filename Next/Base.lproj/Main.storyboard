@@ -21,13 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Next" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="151.5" y="312.5" width="73" height="43"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your next thing to do" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDk-cv-Gan">
                                 <rect key="frame" x="120.5" y="363.5" width="134.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -41,22 +34,34 @@
                                     <action selector="next:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="D5r-gk-Z3e"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCZ-qz-yBG">
+                                <rect key="frame" x="16" y="305.5" width="343" height="55"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="view:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="aF5-17-PT4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
+                            <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="8g2-MN-qRc"/>
+                            <constraint firstItem="zCZ-qz-yBG" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="AN1-Pg-gZW"/>
                             <constraint firstItem="0hV-Em-ffB" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="JEI-1z-ZE7"/>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
+                            <constraint firstAttribute="trailing" secondItem="zCZ-qz-yBG" secondAttribute="trailing" constant="16" id="LlY-4P-sol"/>
                             <constraint firstAttribute="trailing" secondItem="0hV-Em-ffB" secondAttribute="trailing" constant="16" id="YsK-BX-0hc"/>
+                            <constraint firstItem="zCZ-qz-yBG" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="eQ8-SJ-i7a"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="0hV-Em-ffB" secondAttribute="bottom" constant="8" id="jHj-CG-zA4"/>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                             <constraint firstItem="0hV-Em-ffB" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="16" id="uiV-Sp-vJn"/>
+                            <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zCZ-qz-yBG" secondAttribute="bottom" constant="3" id="x0G-i2-Q8a"/>
+                            <constraint firstItem="zCZ-qz-yBG" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="16" id="z8a-0I-3O3"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Next" image="second" id="cPa-gy-q4n"/>
                     <connections>
-                        <outlet property="nextLabel" destination="zEq-FU-wV5" id="uYQ-gz-ZSp"/>
+                        <outlet property="nextLabel" destination="zCZ-qz-yBG" id="IIF-yl-flE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -131,7 +136,7 @@
         <!--Generic-->
         <scene sceneID="ug5-Ee-Etq">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="FFf-Nn-sEy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FFf-Nn-sEy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Generic" image="first" id="KCb-nn-DH7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hVS-HM-e9E">
@@ -139,6 +144,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="e02-2e-jX0">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="oOk-VS-tIl" kind="relationship" relationship="rootViewController" id="gW8-Oc-Iyn"/>
                     </connections>

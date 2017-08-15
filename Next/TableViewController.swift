@@ -1,6 +1,6 @@
 import UIKit
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController, CanViewTodos {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -125,6 +125,13 @@ class Todo {
     let importance: TripleState
     let managedTodo: TodoMO
     
+    var score: Double {
+        //TODO: Improve score algorithm to care about time left, etc.
+        get {
+            return Double(importance.toInt() - difficulty.toInt())
+        }
+    }
+    
     var displayOrder: Int {
         get {
             return Int(managedTodo.displayOrder)
@@ -132,6 +139,36 @@ class Todo {
         
         set(x){
             managedTodo.displayOrder = Int32(x)
+        }
+    }
+    
+    
+    
+    static func findOptimalTodo(from todos: [Todo], ignoring: [Todo]) -> Todo? {
+        if todos.isEmpty {
+            return nil
+        }
+        var maxScoredTodo: Todo? = nil
+        for todo in todos {
+            // If we're ignoring the current todo, skip it
+            if ignoring.contains(where: { (todoToCompare) in
+                return todo === todoToCompare
+            }) {
+                continue
+            }
+            // If it's a more optimal todo, save it
+            if maxScoredTodo == nil || todo.score > maxScoredTodo!.score {
+                maxScoredTodo = todo
+            }
+        }
+        if let maxScoredTodo = maxScoredTodo {
+            return maxScoredTodo
+        } else {
+            if !ignoring.isEmpty {
+                return findOptimalTodo(from: todos, ignoring: [])
+            } else {
+                return nil
+            }
         }
     }
 }

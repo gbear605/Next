@@ -12,6 +12,24 @@ class TodoModel {
     
     private var todos: [Category:[Todo]] = [.GENERIC:[], .DEPENDENT:[], .NOW:[], .LONGTERM:[], .EVENT:[]]
     
+    private var updateListeners: [Category:[(Todo) -> ()]] = [.GENERIC:[], .DEPENDENT:[], .NOW:[], .LONGTERM:[], .EVENT:[]]
+    
+    func addUpdateListener(for category: Category, f: @escaping (Todo) -> ()) {
+        updateListeners[category]?.append(f)
+    }
+    
+    func addUpdateListener(f: @escaping (Todo) -> ()) {
+        for category in Category.list {
+            updateListeners[category]?.append(f)
+        }
+    }
+    
+    func addUpdateListener(category: Category, todo: Todo) {
+        for listener in updateListeners[category]! {
+            listener(todo)
+        }
+    }
+    
     func add(todo toAdd: Todo, at index: Int = -1) {
         if index == -1 {
             toAdd.displayOrder = numTodos(category: toAdd.category)
@@ -21,6 +39,7 @@ class TodoModel {
             move(toAdd.category, from: numTodos(category: toAdd.category) - 1, to: index)
         }
         DataManager.singleton.save()
+        addUpdateListener(category: toAdd.category, todo: toAdd)
     }
     
     func move(_ category: Category, from indexFrom: Int, to indexTo: Int) {
@@ -66,6 +85,8 @@ class TodoModel {
         let todo: Todo = todos[category]!.remove(at: index)
         DataManager.singleton.managedContext!.delete(todo.managedTodo)
         DataManager.singleton.save()
+        addUpdateListener(category: todo.category, todo: todo)
+        
     }
     
 }

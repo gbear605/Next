@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		850561961ED6022F00A08A95 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850561951ED6022F00A08A95 /* TodoViewController.swift */; };
 		850561981ED6036C00A08A95 /* TodoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 850561971ED6036C00A08A95 /* TodoViewController.xib */; };
+		8560DAB11F2CD39700C4EE15 /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F526A61F12AE6B00B6459C /* Dimension.swift */; };
+		8560DAB21F2CD39700C4EE15 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F526A81F12AE6B00B6459C /* Time.swift */; };
+		8560DAB31F2CD39700C4EE15 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F526A71F12AE6B00B6459C /* Unit.swift */; };
 		856D96541EFE20D300EACBD1 /* Next.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 856D96521EFE20D300EACBD1 /* Next.xcdatamodeld */; };
 		85A3B0481EBF4DB600BA2111 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A3B0471EBF4DB600BA2111 /* TodoModel.swift */; };
 		85C16F1C1EA92C3D00F1A707 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C16F1B1EA92C3D00F1A707 /* AppDelegate.swift */; };
@@ -258,6 +261,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8560DAB11F2CD39700C4EE15 /* Dimension.swift in Sources */,
+				8560DAB21F2CD39700C4EE15 /* Time.swift in Sources */,
+				8560DAB31F2CD39700C4EE15 /* Unit.swift in Sources */,
 				856D96541EFE20D300EACBD1 /* Next.xcdatamodeld in Sources */,
 				85C16F201EA92C3D00F1A707 /* NextViewController.swift in Sources */,
 				85C16F3E1EA92FDD00F1A707 /* TableViewController.swift in Sources */,
